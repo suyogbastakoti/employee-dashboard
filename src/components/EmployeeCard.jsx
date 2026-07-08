@@ -9,18 +9,8 @@ import {
 
 import { MdEmail } from "react-icons/md";
 
-const EmployeeCard = ( {users, search} ) => {
-  const filteredUsers = users.filter((user)=>
-  user.name.toLowerCase().includes(search.toLowerCase()));
-
-  if(filteredUsers.length === 0){
-    return (
-      <div className="flex justify-center items-center h-40">
-        <h1 className="text-gray-500 text-lg">No Employees Found!</h1>
-      </div>
-    );
-  }
-
+const EmployeeCard = ( { filteredUsers, onView } ) => {
+  
   return (
    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     {filteredUsers.map((user)=>(
@@ -108,6 +98,7 @@ const EmployeeCard = ( {users, search} ) => {
         <div className="flex justify-between items-center mt-8 pt-4 border-t">
 
           <button
+            onClick={()=> onView(user)}
             className="text-purple-600 font-semibold hover:underline"
           >
             View Details
@@ -115,11 +106,15 @@ const EmployeeCard = ( {users, search} ) => {
 
           <div className="flex gap-4">
 
-            <button className="text-blue-600 hover:scale-110 transition">
+            <button 
+              className="text-blue-600 hover:scale-110 transition"
+            >
               <FaEdit />
             </button>
 
-            <button className="text-red-600 hover:scale-110 transition">
+            <button 
+              className="text-red-600 hover:scale-110 transition"
+            >
               <FaTrash />
             </button>
 

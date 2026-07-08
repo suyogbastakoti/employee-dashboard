@@ -2,12 +2,17 @@ import Statscard from "../components/StatsCard"
 import EmployeeCard from "../components/EmployeeCard"
 import Searchbar from "../components/Searchbar"
 import { useEffect, useState } from "react"
+import UserModal from "../components/UserModal";
 
 const EmployerDashboard = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  
 
   useEffect(()=>{
     const fetchUsers = async ()=>{
@@ -42,6 +47,18 @@ const EmployerDashboard = () => {
   if(error){
     return <h1>{error}</h1>
   }
+
+  const filteredUsers = users.filter((user) =>
+  user.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  if(filteredUsers.length === 0){
+    return (
+      <div className="flex justify-center items-center h-40">
+        <h1 className="text-gray-500 text-lg">No Employees Found!</h1>
+      </div>
+    );
+  }
   
 
   return (
@@ -69,8 +86,13 @@ const EmployerDashboard = () => {
       />
 
       <EmployeeCard 
-        users={users}
-        search={search}
+        filteredUsers={filteredUsers}
+        onView = {setSelectedUser}
+      />
+
+      <UserModal 
+        user={selectedUser}
+        onClose={()=>setSelectedUser(null)}
       />
 
     </div>
