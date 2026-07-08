@@ -8,7 +8,7 @@ function App(){
     <div className="min-h-screen ">
       <Navbar/>
     
-    <div className="flex gap-4">
+    <div className="flex pt-16">
 
       <Sidebar/>
 

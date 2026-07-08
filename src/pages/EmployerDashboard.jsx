@@ -45,11 +45,19 @@ const EmployerDashboard = () => {
   
 
   return (
-    <div className="bg-gray-200 p-6 flex flex-col gap-4 flex-1">
+    <div className="ml-64 flex-1 min-h-[calc(100vh-4rem)] bg-gray-100 p-8 flex flex-col gap-6">
       
-      <h1 className="p-5 font-bold text-2xl">
-        Employee Management
-      </h1>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-800">Employee Dashboard</h1>
+
+          <p className="text-gray-500 mt-2">Manage your employees and company information.</p>
+        </div>
+
+        <button className="bg-purple-600 text-white px-5 py-3 rounded-lg hover:bg-purple-700 transition">
+          +Add Employee
+        </button>
+      </div>
 
       <Statscard 
         users={users}

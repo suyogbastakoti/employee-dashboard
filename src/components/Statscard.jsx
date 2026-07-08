@@ -1,28 +1,94 @@
+import {
+  FaUsers,
+  FaBuilding,
+  FaUserCheck
+} from "react-icons/fa";
 
-
-const Statscard = ({ users }) => {
-  
+const StatsCard = ({ users }) => {
 
   return (
-    <div className="grid grid-cols-3 gap-4 w-full text-black ">
 
-      <div className="p-4  rounded-xl text-3xl space-y-6 bg-white">
-        <p className="text-gray-400 text-xl">Total Employees</p>
-        <h1>{users.length}</h1>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div className="bg-white rounded-xl shadow p-6">
+
+        <div className="flex justify-between">
+
+          <div>
+
+            <p className="text-gray-500">
+              Total Employees
+            </p>
+
+            <h2 className="text-3xl font-bold mt-2">
+              {users.length}
+            </h2>
+
+          </div>
+
+          <FaUsers
+            className="text-purple-600"
+            size={34}
+          />
+
+        </div>
+
       </div>
 
-      <div className="p-4  rounded-xl text-3xl space-y-6 bg-white">
-        <p className="text-gray-400 text-xl">Departments</p>
-        <h1>5</h1>
+      <div className="bg-white rounded-xl shadow p-6">
+
+        <div className="flex justify-between">
+
+          <div>
+
+            <p className="text-gray-500">
+              Departments
+            </p>
+
+            <h2 className="text-3xl font-bold mt-2">
+              5
+            </h2>
+
+          </div>
+
+          <FaBuilding
+            className="text-blue-600"
+            size={34}
+          />
+
+        </div>
+
       </div>
 
-      <div className="p-4 rounded-xl text-3xl space-y-6 bg-white">
-        <p className="text-gray-400 text-xl">Active Today</p>
-        <h1>8</h1>
+      <div className="bg-white rounded-xl shadow p-6">
+
+        <div className="flex justify-between">
+
+          <div>
+
+            <p className="text-gray-500">
+              Active Today
+            </p>
+
+            <h2 className="text-3xl font-bold mt-2">
+              8
+            </h2>
+
+          </div>
+
+          <FaUserCheck
+            className="text-green-600"
+            size={34}
+          />
+
+        </div>
+
       </div>
 
     </div>
-  )
-}
 
-export default Statscard;
+  );
+
+};
+
+export default StatsCard;
