@@ -1,8 +1,11 @@
 import Statscard from "../components/StatsCard"
 import EmployeeCard from "../components/EmployeeCard"
-import Searchbar from "../components/Searchbar"
+
 import { useEffect, useState } from "react"
 import UserModal from "../components/UserModal";
+import Toolbar from "../components/Toolbar";
+
+import AddEmployeeModal from "../components/AddEmployeeModal";
 
 const EmployerDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -11,6 +14,7 @@ const EmployerDashboard = () => {
   const [error, setError] = useState("");
 
   const [selectedUser, setSelectedUser] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   
 
@@ -52,15 +56,7 @@ const EmployerDashboard = () => {
   user.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  if(filteredUsers.length === 0){
-    return (
-      <div className="flex justify-center items-center h-40">
-        <h1 className="text-gray-500 text-lg">No Employees Found!</h1>
-      </div>
-    );
-  }
-  
-
+ 
   return (
     <div className="ml-64 flex-1 min-h-[calc(100vh-4rem)] bg-gray-100 p-8 flex flex-col gap-6">
       
@@ -70,19 +66,16 @@ const EmployerDashboard = () => {
 
           <p className="text-gray-500 mt-2">Manage your employees and company information.</p>
         </div>
-
-        <button className="bg-purple-600 text-white px-5 py-3 rounded-lg hover:bg-purple-700 transition">
-          +Add Employee
-        </button>
       </div>
 
       <Statscard 
         users={users}
       />
 
-      <Searchbar 
-        search={search} 
+      <Toolbar
+        search={search}
         setSearch={setSearch}
+        onAddEmployee={() => setShowAddModal(true)}
       />
 
       <EmployeeCard 
@@ -93,6 +86,11 @@ const EmployerDashboard = () => {
       <UserModal 
         user={selectedUser}
         onClose={()=>setSelectedUser(null)}
+      />
+
+      <AddEmployeeModal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
       />
 
     </div>
