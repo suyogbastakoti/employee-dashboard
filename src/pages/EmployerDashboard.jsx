@@ -16,6 +16,12 @@ const EmployerDashboard = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
 
+  const handleAddEmployee = (newEmployee) => {
+  setUsers((prevUsers) => [...prevUsers, newEmployee]);
+
+  setShowAddModal(false);
+};
+
   
 
   useEffect(()=>{
@@ -91,6 +97,7 @@ const EmployerDashboard = () => {
       <AddEmployeeModal
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
+        onAddEmployee={handleAddEmployee}
       />
 
     </div>
