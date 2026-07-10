@@ -22,6 +22,19 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (
+            !formData.name ||
+            !formData.email ||
+            !formData.phone ||
+            !formData.website ||
+            !formData.company ||
+            !formData.city
+            ) 
+            {
+            alert("Please fill in all fields.");
+            return;
+        }
+
         const newEmployee = {
             id: Date.now(),
             name: formData.name,
@@ -60,7 +73,7 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
                 </h2>
 
                 <form
-                     onSubmit={handleSubmit} 
+                    onSubmit={handleSubmit} 
                     className="space-y-4"
                 >
                     <input
