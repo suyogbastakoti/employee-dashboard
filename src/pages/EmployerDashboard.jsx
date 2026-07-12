@@ -113,6 +113,7 @@ const EmployerDashboard = () => {
         filteredUsers={filteredUsers}
         onView = {setSelectedUser}
         onEdit = {handleEditEmployee}
+        onDelete = {handleDeleteEmployee}
       />
 
       <UserModal 
