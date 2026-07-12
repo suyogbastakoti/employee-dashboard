@@ -9,7 +9,7 @@ import {
 
 import { MdEmail } from "react-icons/md";
 
-const EmployeeCard = ( { filteredUsers, onView } ) => {
+const EmployeeCard = ( { filteredUsers, onView, onEdit } ) => {
   
   return (
    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -107,6 +107,7 @@ const EmployeeCard = ( { filteredUsers, onView } ) => {
           <div className="flex gap-4">
 
             <button 
+              onClick={()=>onEdit(user)}
               className="text-blue-600 hover:scale-110 transition"
             >
               <FaEdit />

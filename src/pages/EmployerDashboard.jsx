@@ -14,8 +14,10 @@ const EmployerDashboard = () => {
   const [error, setError] = useState("");
 
   const [selectedUser, setSelectedUser] = useState(null);
+  const [editingEmployee, setEditingEmployee] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
 
+  //add new employee
   const handleAddEmployee = (newEmployee) => {
   setUsers((prevUsers) => [...prevUsers, newEmployee]);
 
@@ -49,6 +51,10 @@ const EmployerDashboard = () => {
 
   },[]);
 
+  useEffect(() => {
+  console.log(editingEmployee);
+}, [editingEmployee]);
+
   
   if(loading){
     return <h1>Loading Employees...</h1>
@@ -62,6 +68,25 @@ const EmployerDashboard = () => {
   user.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  //handle editing users
+  const handleEditEmployee = (employee)=>{
+    setEditingEmployee(employee);
+    setShowAddModal(true);
+  }
+
+  //delete users
+  const handleDeleteEmployee = (id)=>{
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this employee?"
+    );
+    if(!confirmDelete) return;
+
+    setUsers((prevUsers)=>
+      prevUsers.filter((user)=> user.id !== id)
+    );
+  }
+
+  
  
   return (
     <div className="ml-64 flex-1 min-h-[calc(100vh-4rem)] bg-gray-100 p-8 flex flex-col gap-6">
@@ -87,6 +112,7 @@ const EmployerDashboard = () => {
       <EmployeeCard 
         filteredUsers={filteredUsers}
         onView = {setSelectedUser}
+        onEdit = {handleEditEmployee}
       />
 
       <UserModal 
@@ -98,10 +124,11 @@ const EmployerDashboard = () => {
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
         onAddEmployee={handleAddEmployee}
+        editingEmployee={editingEmployee}
       />
 
     </div>
-  )
-}
+  );
+};
 
 export default EmployerDashboard;

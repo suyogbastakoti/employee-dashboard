@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
+const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee, editingEmployee })=>{
 
     const [formData, setFormData] = useState({
         name: "",
@@ -10,6 +10,20 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
         company: "",
         city: "",
         });
+
+    useEffect(()=>{
+        if(editingEmployee){
+            setFormData({
+                name: editingEmployee.name,
+                email: editingEmployee.email,
+                phone: editingEmployee.phone,
+                website: editingEmployee.website,
+                company: editingEmployee.company.name,
+                city: editingEmployee.address.city,
+            });
+        }
+    },[editingEmployee]);
+    
 
     const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,7 +103,6 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
                         type="email"
                         name="email"
                         placeholder="Email"
-                        className="w-full border rounded-lg p-3" 
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full border rounded-lg p-3"
@@ -99,7 +112,6 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
                         type="text"
                         name="phone"
                         placeholder="Phone"
-                        className="w-full border rounded-lg p-3"
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full border rounded-lg p-3"
@@ -109,7 +121,6 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
                         type="text"
                         name="website"
                         placeholder="Website"
-                        className="w-full border rounded-lg p-3"
                         value={formData.website}
                         onChange={handleChange}
                         className="w-full border rounded-lg p-3"
@@ -119,7 +130,6 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
                         type="text"
                         name="company"
                         placeholder="Company"
-                        className="w-full border rounded-lg p-3"
                         value={formData.company}
                         onChange={handleChange}
                         className="w-full border rounded-lg p-3"
@@ -129,7 +139,7 @@ const AddEmployeeModal = ({ isOpen, onClose, onAddEmployee })=>{
                         type="text"
                         name="city"
                         placeholder="City"
-                        className="w-full border rounded-lg p-3"
+                        value={formData.city}
                         onChange={handleChange}
                         className="w-full border rounded-lg p-3"
                     />
