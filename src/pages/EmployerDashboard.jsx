@@ -27,6 +27,15 @@ const EmployerDashboard = () => {
   
 
   useEffect(()=>{
+
+    const savedUsers = localStorage.getItem("employees");
+
+    if(savedUsers){
+      setUsers(JSON.parse(savedUsers));
+      setLoading(false);
+      return;
+    }
+
     const fetchUsers = async ()=>{
     try {
       const response = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -39,6 +48,9 @@ const EmployerDashboard = () => {
 
       setUsers(data);
       console.log(data);
+
+      //save fetched data into localStorage
+      localStorage.setItem("employees", JSON.stringify(data));
       
     } catch (err) {
       setError(err.message);
@@ -50,6 +62,12 @@ const EmployerDashboard = () => {
   fetchUsers();
 
   },[]);
+
+  useEffect(()=>{
+    if(users.length > 0){
+      localStorage.setItem("employees", JSON.stringify(users));
+    }
+  }, [users]);
 
   useEffect(() => {
   console.log(editingEmployee);
